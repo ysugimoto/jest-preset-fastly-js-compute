@@ -1,6 +1,6 @@
 {
   "name": "jest-preset-fastly-js-compute",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "main": "jest-preset.js",
   "license": "MIT",
   "devDependencies": {
