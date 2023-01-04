@@ -1,0 +1,23 @@
+name: publish
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+    branches-ignore:
+      - "*"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/build
+      - run: |
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+

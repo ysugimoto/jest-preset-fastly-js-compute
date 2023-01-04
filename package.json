@@ -5,11 +5,39 @@
   "license": "MIT",
   "devDependencies": {
     "@fastly/js-compute": "^1.0.1",
+    "@types/node": "^18.11.18",
     "@types/node-fetch": "^2.6.2",
+    "@typescript-eslint/eslint-plugin": "^5.48.0",
+    "@typescript-eslint/parser": "^5.48.0",
+    "eslint": "^8.31.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.0",
+    "prettier": "^2.8.1",
+    "rimraf": "^3.0.2",
     "typescript": "^4.9.4"
   },
   "dependencies": {
     "node-fetch": "^2.6.7",
     "ts-jest": "^29.0.3"
+  },
+  "scripts": {
+    "lint": "eslint --fix --ext .ts,.js ./src",
+    "clean": "rimraf typescript ./*.js",
+    "build": "tsc",
+    "prepare": "husky install",
+    "lint-staged": "lint-staged"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged; test"
+    }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix --ext .ts,.js ./src"
+    ]
   }
 }

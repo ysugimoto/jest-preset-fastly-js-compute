@@ -37,12 +37,15 @@ export class CacheOverride {
   public surrogateKey?: string;
   public pci?: boolean;
 
-  constructor(mode: "none" | "pass" | "override", init?: {
-    ttl?: number;
-    swr?: number;
-    surrogateKey?: string;
-    pci?: boolean;
-  }) {
+  constructor(
+    mode: "none" | "pass" | "override",
+    init?: {
+      ttl?: number;
+      swr?: number;
+      surrogateKey?: string;
+      pci?: boolean;
+    }
+  ) {
     this.mode = mode;
     if (init) {
       this.ttl = init.ttl;
@@ -87,11 +90,21 @@ export function env(name: string): string {
 }
 
 // ref: https://github.com/fastly/js-compute-runtime/blob/main/types/fastly:experimental.d.ts
-export function setBaseURL(base: URL | null | undefined): void {}
-export function setDefaultBackend(backend: string): void {}
-export function enableDebugLogging(enabled: boolean): void {}
-export function includeBytes(path: string): Uint8Array { return new Uint8Array() }
-export function allowDynamicBackends(enabled: boolean): void {}
+export function setBaseURL(base: URL | null | undefined): void {
+  return;
+}
+export function setDefaultBackend(backend: string): void {
+  return;
+}
+export function enableDebugLogging(enabled: boolean): void {
+  return;
+}
+export function includeBytes(path: string): Uint8Array {
+  return new Uint8Array();
+}
+export function allowDynamicBackends(enabled: boolean): void {
+  return;
+}
 
 // ref: https://github.com/fastly/js-compute-runtime/blob/main/types/fastly:geolocation.d.ts
 interface Geolocation {

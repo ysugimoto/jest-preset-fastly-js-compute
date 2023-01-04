@@ -27,7 +27,13 @@ export class DecompressionStream {
 }
 
 export const crypto = { getRandomValues };
-export const fetch: (input: RequestInfo, init?: RequestInit) => Promise<Response> = globalThis.fetch || nodeFetch;
-export function addEventListener<K extends keyof EventListenerMap>(evt: K, listener: EventListenerMap[K]): void {
+export const fetch: (
+  input: RequestInfo,
+  init?: RequestInit
+) => Promise<Response> = globalThis.fetch || nodeFetch;
+export function addEventListener<K extends keyof EventListenerMap>(
+  evt: K,
+  listener: EventListenerMap[K]
+): void {
   // noop
 }
