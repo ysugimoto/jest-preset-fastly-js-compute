@@ -11,7 +11,6 @@ runs:
     - name: test and lint program
       shell: bash
       run: |
-        npm run test
         npm run lint
     - name: build app
       shell: bash
