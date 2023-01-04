@@ -1,7 +1,7 @@
 {
   "name": "jest-preset-fastly-js-compute",
-  "version": "1.0.0",
-  "main": "dist/jest-preset",
+  "version": "0.6.0",
+  "main": "jest-preset.js",
   "license": "MIT",
   "devDependencies": {
     "@fastly/js-compute": "^1.0.1",
@@ -11,8 +11,5 @@
   "dependencies": {
     "node-fetch": "^2.6.7",
     "ts-jest": "^29.0.3"
-  },
-  "engines": {
-    "node": ">=18.0"
   }
 }

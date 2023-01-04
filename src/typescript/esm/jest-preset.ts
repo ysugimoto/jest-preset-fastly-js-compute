@@ -13,6 +13,6 @@ export default {
     fetch,
   },
   moduleNameMapper: {
-    "^fastly:.*": "node_modules/jest-preset-fastly-js-compute/dist/fastly-js-compute-mock.js",
+    "^fastly:.*": "<rootDir>/node_modules/jest-preset-fastly-js-compute/fastly-js-compute-mock.js",
   },
 }
