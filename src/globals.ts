@@ -1,5 +1,5 @@
 /// <reference types="@fastly/js-compute" />
-import { getRandomValues } from "crypto";
+import { getRandomValues, randomUUID } from "crypto";
 import * as nodeFetch from "node-fetch";
 
 // ref: https://github.com/fastly/js-compute-runtime/blob/main/types/globals.d.ts
@@ -26,7 +26,7 @@ export class DecompressionStream {
   }
 }
 
-export const crypto = { getRandomValues };
+export const crypto = { getRandomValues, randomUUID };
 export const fetch: (
   input: RequestInfo,
   init?: RequestInit
