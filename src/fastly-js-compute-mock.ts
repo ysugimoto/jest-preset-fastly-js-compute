@@ -165,6 +165,26 @@ export class Logger {
   }
 }
 
+function toString(data: BodyInit): string {
+  if (typeof data === "string") {
+    return data;
+  } else if (data instanceof ArrayBuffer) {
+    const view = new Uint8Array(data);
+    let str = "";
+    for (let i = 0; i < view.byteLength; i++) {
+      str += String.fromCharCode(view[i]);
+    }
+    return str;
+  } else if (data instanceof Uint8Array) {
+    let str = "";
+    for (let i = 0; i < data.byteLength; i++) {
+      str += String.fromCharCode(data[i]);
+    }
+    return str;
+  }
+  return data.toString();
+}
+
 // ref: https://github.com/fastly/js-compute-runtime/blob/main/types/fastly:object-store.d.ts
 // type BodyInit = ReadableStream | ArrayBufferView | ArrayBuffer | URLSearchParams | string;
 class ObjectStoreItem implements ObjectStoreEntry {
@@ -173,19 +193,27 @@ class ObjectStoreItem implements ObjectStoreEntry {
     this.data = data;
   }
   get body(): ReadableStream {
+    if (this.data instanceof ReadableStream) {
+      return this.data;
+    }
     return new ReadableStream();
   }
   get bodyUsed(): boolean {
     return false;
   }
   text(): Promise<string> {
-    return Promise.resolve("");
+    return Promise.resolve(toString(this.data));
   }
   json(): Promise<object> {
-    return Promise.resolve({});
+    return Promise.resolve(JSON.parse(toString(this.data)));
   }
   arrayBuffer(): Promise<ArrayBuffer> {
-    return Promise.resolve(new Uint8Array());
+    const buf = new Uint8Array();
+    const str = toString(this.data);
+    for (let i = 0; i < str.length; i++) {
+      buf[i] = str[i].charCodeAt(0);
+    }
+    return Promise.resolve(buf);
   }
 }
 export class ObjectStore {
