@@ -2,8 +2,8 @@
 
 Jest presets for [JavaScript on Compute@Edge](https://developer.fastly.com/learning/compute/javascript/).
 
-- Provide Compute@Edge global variables/classes which is defined inside fastly runtime
-- Resolve namepsaced import like `fastly:xxx`
+- Provide Compute@Edge global variables/classes which are defined inside fastly runtime
+- Resolve namespaced imports like `fastly:xxx`
 
 ## Requirements
 
