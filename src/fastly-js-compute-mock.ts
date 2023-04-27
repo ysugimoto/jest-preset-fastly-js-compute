@@ -236,3 +236,29 @@ export class ObjectStore {
     return Promise.resolve(undefined);
   }
 }
+
+// ref: https://github.com/fastly/js-compute-runtime/blob/main/types/fastly:secret-store.d.ts
+// Note that SecretStore related class does not seem to be public yet, but just declare for future implementation.
+class SecretStoreEntry {
+  private name: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  plaintext(): string {
+    return "";
+  }
+}
+
+class SecretStore {
+  private name: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  get(key: string): Promise<SecretStoreEntry | null> {
+    return Promise.resolve(null);
+  }
+}
