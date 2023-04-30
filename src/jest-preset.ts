@@ -6,6 +6,7 @@ import {
   DecompressionStream,
   crypto,
   fetch,
+  fastly,
 } from "./globals";
 
 export default {
@@ -15,6 +16,7 @@ export default {
     DecompressionStream,
     crypto,
     fetch,
+    fastly,
   },
   moduleNameMapper: {
     "^fastly:.*":

@@ -107,7 +107,7 @@ export function allowDynamicBackends(enabled: boolean): void {
 }
 
 // ref: https://github.com/fastly/js-compute-runtime/blob/main/types/fastly:geolocation.d.ts
-interface Geolocation {
+export interface Geolocation {
   as_name: string | null;
   as_number: number | null;
   area_code: number | null;
