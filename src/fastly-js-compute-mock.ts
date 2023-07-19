@@ -251,7 +251,7 @@ class SecretStoreEntry {
   }
 }
 
-class SecretStore {
+export class SecretStore {
   private name: string;
 
   constructor(name: string) {
