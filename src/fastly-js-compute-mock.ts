@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /// <reference types="@fastly/js-compute" />
 
 // ref: https://github.com/fastly/js-compute-runtime/blob/main/types/fastly:backend.d.ts
@@ -44,7 +45,7 @@ export class CacheOverride {
       swr?: number;
       surrogateKey?: string;
       pci?: boolean;
-    }
+    },
   ) {
     this.mode = mode;
     if (init) {
@@ -160,6 +161,7 @@ export class Logger {
     this.name = name;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   log(message: any) {
     console.log(`[FASTLY: ${this.name}] ${JSON.stringify(message)}`);
   }
@@ -185,9 +187,9 @@ function toString(data: BodyInit): string {
   return data.toString();
 }
 
-// ref: https://github.com/fastly/js-compute-runtime/blob/main/types/fastly:object-store.d.ts
+// ref: https://github.com/fastly/js-compute-runtime/blob/main/types/fastly:kv-store.d.ts
 // type BodyInit = ReadableStream | ArrayBufferView | ArrayBuffer | URLSearchParams | string;
-class ObjectStoreItem implements ObjectStoreEntry {
+class KVStoreItem implements KVStoreEntry {
   private data: BodyInit;
   constructor(data: BodyInit) {
     this.data = data;
@@ -216,15 +218,15 @@ class ObjectStoreItem implements ObjectStoreEntry {
     return Promise.resolve(buf);
   }
 }
-export class ObjectStore {
+export class KVStore {
   private name: string;
-  private store: { [key: string]: ObjectStoreEntry } = {};
+  private store: { [key: string]: KVStoreEntry } = {};
 
   constructor(name: string) {
     this.name = name;
   }
 
-  get(key: string): Promise<ObjectStoreEntry | null> {
+  get(key: string): Promise<KVStoreEntry | null> {
     if (key in this.store) {
       return Promise.resolve(this.store[key]);
     }
@@ -232,7 +234,7 @@ export class ObjectStore {
   }
 
   put(key: string, value: BodyInit): Promise<undefined> {
-    this.store[key] = new ObjectStoreItem(value);
+    this.store[key] = new KVStoreItem(value);
     return Promise.resolve(undefined);
   }
 }

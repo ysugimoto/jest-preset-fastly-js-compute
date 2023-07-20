@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /// <reference types="@fastly/js-compute" />
 import { getRandomValues, randomUUID, subtle } from "crypto";
 import * as nodeFetch from "node-fetch";
@@ -49,11 +50,11 @@ export const crypto = {
 };
 export const fetch: (
   input: RequestInfo,
-  init?: RequestInit
+  init?: RequestInit,
 ) => Promise<Response> = globalThis.fetch || nodeFetch;
 export function addEventListener<K extends keyof EventListenerMap>(
   evt: K,
-  listener: EventListenerMap[K]
+  listener: EventListenerMap[K],
 ): void {
   // noop
 }
