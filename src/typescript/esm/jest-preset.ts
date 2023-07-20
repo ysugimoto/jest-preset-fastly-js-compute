@@ -1,6 +1,5 @@
 /// <reference types="@fastly/js-compute" />
 
-import defaultESM from "ts-jest/presets/default-esm/jest-preset";
 import {
   addEventListener,
   CompressionStream,
@@ -9,9 +8,8 @@ import {
   fetch,
   fastly,
 } from "../../globals";
-
+import { join } from "node:path";
 export default {
-  ...defaultESM,
   globals: {
     addEventListener,
     CompressionStream,
@@ -21,7 +19,6 @@ export default {
     fastly,
   },
   moduleNameMapper: {
-    "^fastly:.*":
-      "<rootDir>/node_modules/jest-preset-fastly-js-compute/fastly-js-compute-mock.js",
+    "^fastly:.*": join(__dirname, "../../fastly-js-compute-mock.js"),
   },
 };

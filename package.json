@@ -5,6 +5,7 @@
   "license": "MIT",
   "devDependencies": {
     "@fastly/js-compute": "^3.1.1",
+    "@types/jest": "^29.5.3",
     "@types/node": "^20.4.2",
     "@types/node-fetch": "^2.6.4",
     "@typescript-eslint/eslint-plugin": "^6.1.0",
@@ -14,9 +15,11 @@
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^5.0.0",
     "husky": "^8.0.3",
+    "jest": "^29.6.1",
     "lint-staged": "^13.2.3",
     "prettier": "^3.0.0",
     "rimraf": "^5.0.1",
+    "ts-node": "^10.9.1",
     "typescript": "^5.1.6"
   },
   "repository": {
@@ -24,7 +27,7 @@
     "url": "git://github.com/ysugimoto/jest-preset-fastly-js-compute.git"
   },
   "dependencies": {
-    "node-fetch": "^3.3.1",
+    "node-fetch": "^2.6.4",
     "ts-jest": "^29.1.1"
   },
   "scripts": {
@@ -32,7 +35,8 @@
     "clean": "rimraf typescript ./*.js",
     "build": "tsc",
     "prepare": "husky install",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "test": "jest"
   },
   "husky": {
     "hooks": {

@@ -26,7 +26,7 @@ export class Backend {
   }
 
   public toString(): string {
-    return JSON.stringify(this.config, null, "  ");
+    return this.config.name;
   }
 }
 
@@ -189,7 +189,7 @@ function toString(data: BodyInit): string {
 
 // ref: https://github.com/fastly/js-compute-runtime/blob/main/types/fastly:kv-store.d.ts
 // type BodyInit = ReadableStream | ArrayBufferView | ArrayBuffer | URLSearchParams | string;
-class KVStoreItem implements KVStoreEntry {
+class KVStoreEntry implements KVStoreEntry {
   private data: BodyInit;
   constructor(data: BodyInit) {
     this.data = data;
@@ -234,7 +234,7 @@ export class KVStore {
   }
 
   put(key: string, value: BodyInit): Promise<undefined> {
-    this.store[key] = new KVStoreItem(value);
+    this.store[key] = new KVStoreEntry(value);
     return Promise.resolve(undefined);
   }
 }
