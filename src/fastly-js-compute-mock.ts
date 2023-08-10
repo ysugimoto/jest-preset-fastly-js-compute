@@ -45,7 +45,7 @@ export class CacheOverride {
       swr?: number;
       surrogateKey?: string;
       pci?: boolean;
-    },
+    }
   ) {
     this.mode = mode;
     if (init) {
@@ -241,7 +241,7 @@ export class KVStore {
 
 // ref: https://github.com/fastly/js-compute-runtime/blob/main/types/fastly:secret-store.d.ts
 // Note that SecretStore related class does not seem to be public yet, but just declare for future implementation.
-class SecretStoreEntry {
+export class SecretStoreEntry {
   private name: string;
 
   constructor(name: string) {
