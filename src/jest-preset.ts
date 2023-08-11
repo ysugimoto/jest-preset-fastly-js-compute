@@ -8,7 +8,7 @@ import {
   fetch,
   fastly,
 } from "./globals";
-
+import { join } from "node:path";
 export default {
   globals: {
     addEventListener,
@@ -19,7 +19,6 @@ export default {
     fastly,
   },
   moduleNameMapper: {
-    "^fastly:.*":
-      "node_modules/jest-preset-fastly-js-compute/fastly-js-compute-mock.js",
+    "^fastly:.*": join(__dirname, "./fastly-js-compute-mock.js"),
   },
 };
