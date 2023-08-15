@@ -36,7 +36,7 @@
     "build": "tsc",
     "prepare": "husky install",
     "lint-staged": "lint-staged",
-    "test": "jest"
+    "test": "tsc && jest"
   },
   "husky": {
     "hooks": {
