@@ -1,5 +1,5 @@
 /// <reference types="@fastly/js-compute" />
-
+//
 import defaultESM from "ts-jest/presets/default-esm/jest-preset";
 import {
   addEventListener,

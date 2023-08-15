@@ -9,6 +9,8 @@ import {
   fastly,
 } from "./globals";
 import { join } from "node:path";
+
+console.log(fastly);
 export default {
   globals: {
     addEventListener,

@@ -1,4 +1,5 @@
 import type { JestConfigWithTsJest } from "ts-jest";
+import { fastly } from "./globals";
 
 const jestConfig: JestConfigWithTsJest = {
   preset: "./typescript/esm/jest-preset.js",
@@ -10,6 +11,9 @@ const jestConfig: JestConfigWithTsJest = {
         useESM: true,
       },
     ],
+  },
+  globals: {
+    fastly,
   },
 };
 
