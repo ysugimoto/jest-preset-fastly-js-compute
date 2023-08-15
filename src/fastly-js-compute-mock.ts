@@ -63,13 +63,12 @@ interface PurgeOptions {
 }
 
 export class SimpleCache {
-  private static _cacheEntry: Map<
+  public static _cacheEntry = new Map<
     string,
     { data: SimpleCacheEntry; ttl: number }
-  >;
+  >();
 
   static get(key: string): SimpleCacheEntry | null {
-    // @note always return null due to we don't have any caching mechanism
     const entry = this._cacheEntry.get(key);
     if (!entry) {
       return null;
@@ -206,7 +205,7 @@ export function allowDynamicBackends(enabled: boolean): void {
 }
 
 // ref: https://github.com/fastly/js-compute-runtime/blob/main/types/fastly%3Afanout.d.ts
-export function createFunoutHandoff(
+export function createFanoutHandoff(
   request: Request,
   backend: string,
 ): Response {
