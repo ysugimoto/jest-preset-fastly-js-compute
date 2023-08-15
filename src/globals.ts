@@ -63,7 +63,7 @@ export function addEventListener<K extends keyof EventListenerMap>(
 // We should export them as global
 // ref: https://github.com/fastly/js-compute-runtime/issues/517
 export const fastly = {
-  __defaultBackend: "default01",
+  __defaultBackend: "",
 
   set baseURL(base: URL | null | undefined) {
     // noop
@@ -79,7 +79,7 @@ export const fastly = {
   },
   env: {
     get(name: string): string {
-      return "";
+      return env(name);
     },
   },
   getLogger(endpoint: string): Logger {
