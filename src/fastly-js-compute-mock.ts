@@ -45,7 +45,7 @@ export class CacheOverride {
       swr?: number;
       surrogateKey?: string;
       pci?: boolean;
-    }
+    },
   ) {
     this.mode = mode;
     if (init) {
