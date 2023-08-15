@@ -106,4 +106,4 @@ dist
 fastly-js-compute-mock.js
 globals.js
 jest-preset.js
-typescript/
+/typescript/
