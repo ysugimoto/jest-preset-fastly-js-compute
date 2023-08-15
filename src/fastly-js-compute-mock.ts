@@ -69,13 +69,13 @@ export class SimpleCache {
   >();
 
   static get(key: string): SimpleCacheEntry | null {
-    const entry = this._cacheEntry.get(key);
+    const entry = SimpleCache._cacheEntry.get(key);
     if (!entry) {
       return null;
     }
     // Check TTL expiration
     if (Date.now() > entry.ttl) {
-      this._cacheEntry.delete(key);
+      SimpleCache._cacheEntry.delete(key);
       return null;
     }
     return entry.data;
