@@ -5,7 +5,7 @@ import {
   crypto,
   fetch,
   fastly,
-} from "../../globals";
+} from "./globals";
 
 // Expose as "global" functions and classes
 Object.assign(globalThis, {
