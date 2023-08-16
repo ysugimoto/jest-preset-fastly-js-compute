@@ -57,6 +57,103 @@ export class CacheOverride {
   }
 }
 
+// ref: https://github.com/fastly/js-compute-runtime/blob/main/types/fastly%3Acache.d.ts
+interface PurgeOptions {
+  scope: "pop" | "global";
+}
+
+export class SimpleCache {
+  public static _cacheEntry = new Map<
+    string,
+    { data: SimpleCacheEntry; ttl: number }
+  >();
+
+  static get(key: string): SimpleCacheEntry | null {
+    const entry = SimpleCache._cacheEntry.get(key);
+    if (!entry) {
+      return null;
+    }
+    // Check TTL expiration
+    if (Date.now() > entry.ttl) {
+      SimpleCache._cacheEntry.delete(key);
+      return null;
+    }
+    return entry.data;
+  }
+
+  // TODO: what does length argument mean?
+  static set(
+    key: string,
+    value: BodyInit,
+    ttl: number,
+    length?: number,
+  ): undefined {
+    SimpleCache._cacheEntry.set(key, {
+      data: new SimpleCacheEntry(value),
+      ttl: Date.now() + ttl,
+    });
+    return;
+  }
+
+  static async getOrSet(
+    key: string,
+    set: () => Promise<{
+      value: BodyInit | ReadableStream;
+      ttl: number;
+      length?: number;
+    }>,
+  ): Promise<SimpleCacheEntry> {
+    const entry = SimpleCache.get(key);
+    if (entry) {
+      return entry;
+    }
+    const item = await set();
+    const data = new SimpleCacheEntry(item.value);
+    SimpleCache._cacheEntry.set(key, {
+      data,
+      ttl: Date.now() + item.ttl,
+    });
+    return Promise.resolve(data);
+  }
+
+  static purge(key: string, options: PurgeOptions): undefined {
+    // No matters whatever purge options are
+    SimpleCache._cacheEntry.delete(key);
+    return;
+  }
+}
+
+// Same implementation of KVStoreEntry
+export class SimpleCacheEntry implements SimpleCacheEntry {
+  private data: BodyInit;
+  constructor(data: BodyInit) {
+    this.data = data;
+  }
+  get body(): ReadableStream {
+    if (this.data instanceof ReadableStream) {
+      return this.data;
+    }
+    return new ReadableStream();
+  }
+  get bodyUsed(): boolean {
+    return false;
+  }
+  text(): Promise<string> {
+    return Promise.resolve(toString(this.data));
+  }
+  json(): Promise<object> {
+    return Promise.resolve(JSON.parse(toString(this.data)));
+  }
+  arrayBuffer(): Promise<ArrayBuffer> {
+    const buf = new Uint8Array();
+    const str = toString(this.data);
+    for (let i = 0; i < str.length; i++) {
+      buf[i] = str[i].charCodeAt(0);
+    }
+    return Promise.resolve(buf);
+  }
+}
+
 // ref: https://github.com/fastly/js-compute-runtime/blob/main/types/fastly:config-store.d.ts
 export class ConfigStore {
   private name: string;
@@ -105,6 +202,16 @@ export function includeBytes(path: string): Uint8Array {
 }
 export function allowDynamicBackends(enabled: boolean): void {
   return;
+}
+
+// ref: https://github.com/fastly/js-compute-runtime/blob/main/types/fastly%3Afanout.d.ts
+export function createFanoutHandoff(
+  request: Request,
+  backend: string,
+): Response {
+  // note that this response is Node.js Response, not a C@E Response
+  // but almost cases are OK because Node.js Response class has compatibility for browser Response object.
+  return new Response();
 }
 
 // ref: https://github.com/fastly/js-compute-runtime/blob/main/types/fastly:geolocation.d.ts
@@ -167,6 +274,7 @@ export class Logger {
   }
 }
 
+// internal, DO NOT expose
 function toString(data: BodyInit): string {
   if (typeof data === "string") {
     return data;
