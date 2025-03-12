@@ -2,7 +2,6 @@ import {
   addEventListener,
   CompressionStream,
   DecompressionStream,
-  crypto,
   fetch,
   fastly,
 } from "../../globals";
@@ -12,7 +11,6 @@ Object.assign(globalThis, {
   addEventListener,
   CompressionStream,
   DecompressionStream,
-  crypto,
   fetch,
   fastly,
 });

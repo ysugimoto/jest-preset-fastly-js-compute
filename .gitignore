@@ -107,3 +107,4 @@ fastly-js-compute-mock.js
 globals.js
 jest-preset.js
 /typescript/
+jest.setup.js

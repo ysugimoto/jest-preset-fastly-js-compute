@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /// <reference types="@fastly/js-compute" />
-import { getRandomValues, randomUUID, subtle } from "crypto";
 import * as nodeFetch from "node-fetch";
 import {
   env,
@@ -41,13 +40,6 @@ interface Algorithm {
 type AlgorithmIdentifier = Algorithm | string;
 type BufferSource = ArrayBufferView | ArrayBuffer;
 
-export const crypto = {
-  getRandomValues,
-  randomUUID,
-  subtle: {
-    digest: subtle.digest,
-  },
-};
 export const fetch: (
   input: RequestInfo,
   init?: RequestInit,
