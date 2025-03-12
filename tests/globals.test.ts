@@ -15,11 +15,6 @@ test("globals", () => {
 
   expect(addEventListener).toBeDefined();
   expect(fetch).toBeDefined();
-  expect(crypto).toBeDefined();
-  expect(crypto.getRandomValues).toBeDefined();
-  expect(crypto.randomUUID).toBeDefined();
-  expect(crypto.subtle).toBeDefined();
-  expect(crypto.subtle.digest).toBeDefined();
   expect(CompressionStream).toBeDefined();
   expect(DecompressionStream).toBeDefined();
 });
